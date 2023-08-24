@@ -14,18 +14,18 @@ export default function AppHeader () {
   return (
     <nav className={`${styles.menu} pt-4 pb-4`}>
 
-      <div className={`${styles["menu-group"]} ${styles["menu-group_left"]}`}>
+      <div className={`${styles.group} ${styles.left}`}>
         <MenuItem Icon={BurgerIcon} active={true} url={"#"}>Конструктор</MenuItem>
         <MenuItem Icon={ListIcon} active={false} url={"#"}>Лента заказов</MenuItem>
       </div>
 
-      <div className={`${styles["menu-group"]} ${styles["menu-group_center"]}`} >
+      <div className={`${styles.group} ${styles.center}`} >
         <a href="#">
           <Logo />
         </a>
       </div>
 
-      <div className={`${styles["menu-group"]} ${styles["menu-group_right"]}`}>
+      <div className={`${styles.group} ${styles.right}`}>
         <MenuItem Icon={ProfileIcon} active={false} url={"#"}>Личный кабинет</MenuItem>
       </div>
 

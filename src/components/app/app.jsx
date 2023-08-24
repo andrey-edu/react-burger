@@ -7,11 +7,12 @@ import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 
 class App extends React.Component {
+
   render() {
     return (
       <div className={styles.page}>
         <AppHeader />
-        <main>
+        <main className={styles.main}>
           <section>
             <BurgerIngredients />
           </section>

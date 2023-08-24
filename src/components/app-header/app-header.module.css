@@ -5,36 +5,30 @@
   align-items: center;
 }
 
-.menu-group {
+.group {
   box-sizing: border-box;
   display: flex;
   column-gap: calc(var(--offset-base-size) * 2);
 }
 
-.menu-group_left {
+.left {
   justify-self: start;
 }
 
-.menu-group_center {
+.center {
   justify-self: center;
 }
 
-.menu-group_right {
+.right {
   justify-self: end;
 }
 
-.menu-item {
+.item {
   box-sizing: border-box;
   display: flex;
   align-items: center;
   column-gap: calc(var(--offset-base-size) * 2);
-  color: var(--text-inactive-color);
+  color: var(--text-primary-color);
   text-decoration: none;
   border-radius: var(--common-border-radius-s);
 }
-
-.menu-item_active {
-  color: var(--text-primary-color);
-}
-
-
