@@ -1,0 +1,44 @@
+.burger {
+  box-sizing: border-box;
+  margin-top: 155px;
+  display: flex;
+  flex-direction: column;
+  row-gap: calc(var(--offset-base-size) * 4);
+  padding-left: calc(var(--offset-base-size) * 4);
+}
+
+.ingredients {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  row-gap: calc(var(--offset-base-size) *4);
+  overflow-y: scroll;
+}
+
+.ingredient {
+  box-sizing: border-box;
+  display: flex;
+  column-gap: calc(var(--offset-base-size) * 2);
+  align-items: center;
+}
+
+.order {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  column-gap: calc(var(--offset-base-size) * 10);
+  padding-right: calc(var(--offset-base-size) * 4);
+}
+
+.order svg {
+  width: 36px;
+  height: 36px;
+}
+
+.total {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  column-gap: var(--offset-base-size);
+}
