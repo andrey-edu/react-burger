@@ -1,33 +1,36 @@
 import React from "react";
+import { useRef, useEffect } from "react";
+import PropTypes from "prop-types";
 
 import styles from "./burger-constructor.module.css";
+import { ingredientsPropTypes } from "../../utils/types";
 
 import { ConstructorElement, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { DragIcon, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
-export default function BurgerConstructor(props) {
-  const bun = props.ingredients.filter((ingredient) => ingredient.type == "bun")[1]; // ! taken first element
-  const ingredients = props.ingredients.filter((ingredient) => ingredient.type != "bun").slice(0, 8); // ! sliced
+function BurgerConstructor({ ingredients }) {
+  const bun = ingredients.filter((ingredient) => ingredient.type == "bun")[1]; // ! taken first element
+  const filling = ingredients.filter((ingredient) => ingredient.type != "bun").slice(0, 8); // ! sliced
 
-  const mainIngredients = React.useRef(null);
-  const orderBlock = React.useRef(null);
+  const mainIngredientsRef = useRef(null);
+  const orderBlockRef = useRef(null);
 
-  React.useEffect(() => {
-    if (mainIngredients) {
+  useEffect(() => {
+    if (mainIngredientsRef) {
 
       const windowHeight = window.innerHeight;
-      const mainY = mainIngredients.current.getBoundingClientRect().y;
-      const orderHeight = orderBlock.current.getBoundingClientRect().height;
+      const mainY = mainIngredientsRef.current.getBoundingClientRect().y;
+      const orderHeight = orderBlockRef.current.getBoundingClientRect().height;
       const padding = 40;
-      const ingredientHeight = mainIngredients.current.firstChild.getBoundingClientRect().height;
-      const ingredientPadding = parseInt(window.getComputedStyle(mainIngredients.current).getPropertyValue("row-gap"));
+      const ingredientHeight = mainIngredientsRef.current.firstChild.getBoundingClientRect().height;
+      const ingredientPadding = parseInt(window.getComputedStyle(mainIngredientsRef.current).getPropertyValue("row-gap"));
 
       const freeSpace = windowHeight - orderHeight - (padding*2) - mainY - ingredientHeight;
       const ingredientsCount = ~~(freeSpace/(ingredientHeight+ingredientPadding));
 
       const mainHeight = ingredientsCount * (ingredientHeight+ingredientPadding) - ingredientPadding;
 
-      mainIngredients.current.style.height = `${mainHeight}px`;
+      mainIngredientsRef.current.style.height = `${mainHeight}px`;
     }
   },[]);
 
@@ -42,9 +45,9 @@ export default function BurgerConstructor(props) {
           thumbnail={bun.image}
           extraClass="ml-8"
         />
-        <div ref={mainIngredients} className={`${styles.ingredients} custom-scroll`}>
+        <div ref={mainIngredientsRef} className={`${styles.ingredients} custom-scroll`}>
           {
-            ingredients.map((ingredient, idx) =>
+            filling.map((ingredient, idx) =>
               <div key={idx} className={`${styles.ingredient}`}>
                 <DragIcon type="primary" />
                 <ConstructorElement
@@ -67,7 +70,7 @@ export default function BurgerConstructor(props) {
         />
       </div>
 
-      <div ref={orderBlock} className={`${styles.order} mt-10`}>
+      <div ref={orderBlockRef} className={`${styles.order} mt-10`}>
         <div className={`${styles.total} text text_type_digits-medium`}>
           <span>610</span>
           <CurrencyIcon type="primary" style={{width:36}}/>
@@ -80,3 +83,8 @@ export default function BurgerConstructor(props) {
   );
 }
 
+BurgerConstructor.propTypes = {
+  ingredients: PropTypes.arrayOf(ingredientsPropTypes).isRequired
+}
+
+export default BurgerConstructor;
