@@ -12,13 +12,13 @@ function IngredientsGroup ({ groupName, group }) {
   return (
     <div className="mt-10">
       <h3 className="text text_type_main-medium">{groupName}</h3>
-      <div className={styles.type}>
+      <ul className={styles.type}>
         {
           group.map((ingredient) =>
             <IngredientsItem key={ingredient._id} ingredient={ingredient} />
           )
         }
-      </div>
+      </ul>
     </div>
   );
 };

@@ -19,10 +19,10 @@ function IngredientDetails({ ingredient }) {
   }
 
   return (
-    <div className={styles.ingredient}>
+    <>
       <div className={styles.image}>
         <img src={ingredient.image_large} onLoad={onImageLoad} />
-        {imageLoading && <Loader message={MESSAGES.loadingImage} />
+        {imageLoading && <Loader>{MESSAGES.loadingImage}</Loader>
         }
       </div>
       <h3 className={`${styles.name} text text_type_main-medium mt-4`}>{ingredient.name}</h3>
@@ -44,7 +44,7 @@ function IngredientDetails({ ingredient }) {
           <span className="text text_type_digits-default mt-2">{ingredient.carbohydrates}</span>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

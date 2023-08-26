@@ -1,5 +1,5 @@
 import React from "react";
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
 
@@ -12,14 +12,27 @@ import { Box } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Typography } from "@ya.praktikum/react-developer-burger-ui-components";
 
 
-function Modal( {children, title, closeModal} ) {
+function Modal({ children, title, closeModal }) {
+
+  const handleEsc = (e) => {
+    if (e.key === "Escape") {
+      closeModal();
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleEsc);
+
+    return () => {
+      document.removeEventListener("keydown", handleEsc);
+    }
+  },[]);
 
   const modalRoot = useMemo(() => document.getElementById("react-modals"), []);
-
   return createPortal(
     (
       <>
-        <ModalOverlay />
+        <ModalOverlay closeModal={closeModal} />
         <div className={`${styles.modal} p-10 pb-15`}>
           <div className={styles.header}>
             <button className={styles.close} onClick={closeModal}>
@@ -27,7 +40,9 @@ function Modal( {children, title, closeModal} ) {
             </button>
             {title && <h2 className="text text_type_main-large mt-3 mb-3">{title}</h2>}
           </div>
-          {children}
+          <div className={styles.content}>
+            {children}
+          </div>
         </div>
       </>
     ),
@@ -36,10 +51,10 @@ function Modal( {children, title, closeModal} ) {
 
 }
 
-// Modal.propTypes = {
-//   children: PropTypes.element.isRequired,
-//   title: PropTypes.string,
-//   setIsOpen: PropTypes.func.isRequired
-// }
+Modal.propTypes = {
+  children: PropTypes.element.isRequired,
+  title: PropTypes.string,
+  closeModal: PropTypes.func.isRequired
+}
 
 export default Modal;

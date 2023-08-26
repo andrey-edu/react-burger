@@ -7,7 +7,7 @@ import { MESSAGES } from "../../utils/messages";
 import AppHeader from "../app-header/app-header";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
-
+import Status from "../status/status";
 
 function App() {
 
@@ -31,25 +31,21 @@ function App() {
     <div className={styles.page}>
       <AppHeader />
       <main className={styles.main}>
-        {!ingredients.hasError
-          ?
-            <>
-              {!ingredients.isLoading && ingredients.data
-                ?
-                  <>
-                    <section>
-                      <BurgerIngredients ingredients={ingredients.data} />
-                    </section>
-                    <section>
-                      <BurgerConstructor ingredients={ingredients.data} />
-                    </section>
-                  </>
-                :
-                  <p>{MESSAGES.loadingData}</p>
-              }
-            </>
-          :
-            <p>{MESSAGES.errorRequestData}</p>
+        {ingredients.data &&
+          <>
+            <section>
+              <BurgerIngredients ingredients={ingredients.data} />
+            </section>
+            <section>
+              <BurgerConstructor ingredients={ingredients.data} />
+            </section>
+          </>
+        }
+        {ingredients.isLoading &&
+          <Status type="loading">{MESSAGES.loadingData}</Status>
+        }
+        {ingredients.hasError &&
+          <Status type="error">{MESSAGES.errorRequestData}</Status>
         }
       </main>
     </div>

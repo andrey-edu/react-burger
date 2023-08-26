@@ -16,13 +16,13 @@ function IngredientsItem({ ingredient }) {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const openModal = useCallback(
+  const openIngredientDetails = useCallback(
     () => {
       setIsOpen(true)
     }, []
   );
 
-  const closeModal = useCallback(
+  const closeIngredientDetails = useCallback(
     () => {
       setIsOpen(false)
     }, []
@@ -30,7 +30,7 @@ function IngredientsItem({ ingredient }) {
 
   return (
     <>
-      <div className={`${styles.ingredient} mt-6`} onClick={openModal}>
+      <li className={`${styles.ingredient} mt-6`} onClick={openIngredientDetails}>
 
         <div className={styles.image}>
           <img src={ingredient.image} alt="" />
@@ -46,10 +46,10 @@ function IngredientsItem({ ingredient }) {
         <p className={`${styles.name} text text_type_main-default`}>
           {ingredient.name}
         </p>
-      </div>
+      </li>
 
       {isOpen &&
-        <Modal title="Детали ингридиента" closeModal={closeModal}>
+        <Modal title="Детали ингридиента" closeModal={closeIngredientDetails}>
           <IngredientDetails ingredient={ingredient} />
         </Modal>
       }
