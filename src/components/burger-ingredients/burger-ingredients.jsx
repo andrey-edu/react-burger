@@ -14,6 +14,7 @@ import { Typography } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function BurgerIngredients({ ingredients }) {
 
+    // Чтобы не делать фильтрацию каждый раз при перерисовке компонента, мемоизируем фильтрацию.
     const buns = useMemo(() => ingredients.filter((ingredient) => ingredient.type === 'bun'), [ingredients]);
     const sauces = useMemo(() => ingredients.filter((ingredient) => ingredient.type === 'sauce'), [ingredients]);
     const mains = useMemo(() => ingredients.filter((ingredient) => ingredient.type === 'main'), [ingredients]);
@@ -27,6 +28,10 @@ function BurgerIngredients({ ingredients }) {
     }
 
     const ingredientsGroupsRef = useRef(null);
+    // При монтировании компонента вызываем перерасчет размерова
+    // и подписываемся на слушатель событий (ресайз окна)
+    // Этот эффект срабатывает при монтировании ( ,[] )
+    // Отписка от слушателя происходит при размонтировании (тоже из-за ,[])
     useEffect(() => {
       if (ingredientsGroupsRef) {
         resizeIngredientsGroup();
