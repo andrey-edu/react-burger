@@ -1,4 +1,5 @@
 export const MESSAGES = {
   loadingData: "Загружаем информацию",
-  errorRequestData: "При загрузке данных произошла ошибка"
+  loadingImage: "Загружаем картинку",
+  errorRequestData: "При загрузке данных произошла ошибка. Попробуйте обновить страницу."
 }

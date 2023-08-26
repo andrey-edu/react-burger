@@ -9,7 +9,7 @@ import { Typography } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import MenuItem from "./menu-item";
 
-export default function AppHeader () {
+export default function AppHeader() {
 
   return (
     <nav className={`${styles.menu} pt-4 pb-4`}>
