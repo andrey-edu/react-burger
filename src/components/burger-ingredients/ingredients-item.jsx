@@ -9,8 +9,13 @@ import { Box } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Typography } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function IngredientsItem({ ingredient }) {
+
+  function handleClickItem() {
+    console.log("clicked");
+  }
+
   return (
-    <div className={`${styles.ingredient} mt-6`}>
+    <div className={`${styles.ingredient} mt-6`} onClick={handleClickItem}>
 
       <div className={styles.image}>
         <img src={ingredient.image} alt="" />

@@ -4,17 +4,17 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 
 export default function IngredientsTabs() {
 
-  const [current, setCurrent] = useState('one')
+  const [current, setCurrent] = useState('buns')
 
   return (
     <div className="mt-5" style={{ display: 'flex' }}>
-      <Tab value="one" active={current === 'one'} onClick={setCurrent}>
+      <Tab value="buns" active={current === 'buns'} onClick={setCurrent}>
         Булки
       </Tab>
-      <Tab value="two" active={current === 'two'} onClick={setCurrent}>
+      <Tab value="sauces" active={current === 'sauces'} onClick={setCurrent}>
         Соусы
       </Tab>
-      <Tab value="three" active={current === 'three'} onClick={setCurrent}>
+      <Tab value="mains" active={current === 'mains'} onClick={setCurrent}>
         Начинки
       </Tab>
     </div>

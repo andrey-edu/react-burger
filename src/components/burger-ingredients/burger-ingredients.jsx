@@ -1,5 +1,5 @@
 import React from "react";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 
 import IngredientsTabs from "./ingredients-tabs";
@@ -13,14 +13,28 @@ import { Typography } from "@ya.praktikum/react-developer-burger-ui-components";
 
 
 function BurgerIngredients({ ingredients }) {
+
+    const buns = useMemo(() => ingredients.filter((ingredient) => ingredient.type === 'bun'), [ingredients]);
+    const sauces = useMemo(() => ingredients.filter((ingredient) => ingredient.type === 'sauce'), [ingredients]);
+    const mains = useMemo(() => ingredients.filter((ingredient) => ingredient.type === 'main'), [ingredients]);
+
+    function resizeIngredientsGroup() {
+      const windowHeight = window.innerHeight;
+      const ingredientsY = ingredientsGroupsRef.current.getBoundingClientRect().y;
+      const bottomPadding = 40;
+
+      ingredientsGroupsRef.current.style.height = `${windowHeight-ingredientsY-bottomPadding}px`;
+    }
+
     const ingredientsGroupsRef = useRef(null);
     useEffect(() => {
       if (ingredientsGroupsRef) {
-        const windowHeight = window.innerHeight;
-        const ingredientsY = ingredientsGroupsRef.current.getBoundingClientRect().y;
-        const bottomPadding = 40;
+        resizeIngredientsGroup();
+        window.addEventListener("resize", resizeIngredientsGroup);
+      }
 
-        ingredientsGroupsRef.current.style.height = `${windowHeight-ingredientsY-bottomPadding}px`;
+      return () => {
+        window.removeEventListener("resize", resizeIngredientsGroup);
       }
     },[]);
 
@@ -31,9 +45,9 @@ function BurgerIngredients({ ingredients }) {
         </h2>
         <IngredientsTabs />
         <div ref={ingredientsGroupsRef} className={`${styles.types} custom-scroll`}>
-          <IngredientsGroup groupName="Булки" group={ingredients.filter((ingredient) => ingredient.type == "bun")} />
-          <IngredientsGroup groupName="Соусы" group={ingredients.filter((ingredient) => ingredient.type == "sauce")} />
-          <IngredientsGroup groupName="Начинки" group={ingredients.filter((ingredient) => ingredient.type == "main")} />
+          <IngredientsGroup groupName="Булки" group={buns} />
+          <IngredientsGroup groupName="Соусы" group={sauces} />
+          <IngredientsGroup groupName="Начинки" group={mains} />
         </div>
       </>
     );
