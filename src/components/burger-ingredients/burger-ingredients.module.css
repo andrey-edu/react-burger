@@ -1,0 +1,39 @@
+.types {
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.type {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: calc(var(--offset-base-size) * 6);
+  row-gap: calc(var(--offset-base-size) * 8);
+  padding-left: calc(var(--offset-base-size) * 4);
+  list-style: none;
+  margin: 0;
+}
+
+.ingredient {
+  box-sizing: border-box;
+  position: relative;
+  flex: 0 1;
+}
+
+.image {
+  box-sizing: border-box;
+  margin-inline: calc(var(--offset-base-size) * 4);
+}
+
+.price {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: var(--offset-base-size);
+}
+
+.name {
+  text-align: center;
+  min-height: 3em;
+}
