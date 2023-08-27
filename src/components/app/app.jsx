@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import styles from "./app.module.css";
 import { MESSAGES } from "../../utils/messages";
+import { getIngredients } from "../../utils/burder-api";
 
 import AppHeader from "../app-header/app-header";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
@@ -13,18 +14,11 @@ function App() {
 
   const [ingredients, setIngredients] = useState({});
 
-  const ingredientsURL = "https://norma.nomoreparties.space/api/ingredients";
-
-  function getIngredients() {
+  useEffect(() => {
     setIngredients({...ingredients, isLoading: true});
-    fetch(ingredientsURL)
-      .then(res => res.json())
+    getIngredients()
       .then(data => setIngredients({...ingredients, data: data.data, isLoading: false, hasError: false}))
       .catch(e => setIngredients({...ingredients, loading: false, hasError: true}));
-  }
-
-  useEffect(() => {
-    getIngredients();
   }, []);
 
   return (

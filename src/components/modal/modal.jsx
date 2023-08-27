@@ -12,6 +12,8 @@ import { Box } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Typography } from "@ya.praktikum/react-developer-burger-ui-components";
 
 
+const modalRoot = document.getElementById("react-modals");
+
 function Modal({ children, title, closeModal }) {
 
   const handleEsc = (e) => {
@@ -28,7 +30,6 @@ function Modal({ children, title, closeModal }) {
     }
   },[]);
 
-  const modalRoot = useMemo(() => document.getElementById("react-modals"), []);
   return createPortal(
     (
       <>
